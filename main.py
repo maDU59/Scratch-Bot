@@ -276,12 +276,8 @@ async def unconnect(ctx):
     print(content)
     if str(user_id) in content:
         pos1 = content.find(str(user_id))
-        pos2 = pos1
-        pos2 += len(str(user_id))
-        pos2 += 3
         name = get_scratch_profile(user_id, content)
-        pos2 += len(name)
-        pos2 += 2
+        pos2 = pos1 + len(str(user_id)) + 3 + len(name) + 2
         pos1 -= 1
         to_delete = content[pos1:pos2]
         content = content.replace(to_delete, "")
@@ -1395,4 +1391,5 @@ async def help(ctx, arg=None):
 
 
 bot.run(token)
+
 
