@@ -36,16 +36,10 @@ bot = commands.Bot(command_prefix="s!",
 
 
 def get_scratch_profile(id, content):
-    pos1 = content.find(str(id))
-    pos1 += len(str(id))
-    pos1 += 3
+    pos1 = content.find(str(id)) + len(str(id)) + 3
     pos2 = pos1
-    x = 0
-    while x == 0:
-        if content[pos2] == '"':
-            x = 1
-        else:
-            pos2 += 1
+    while content[pos2] != '"':
+        pos2 += 1
     print(pos2)
     name = content[pos1:pos2]
     print(name)
@@ -53,11 +47,9 @@ def get_scratch_profile(id, content):
 
 
 def get_discord_id_with_scratch_username(username, content):
-    pos1 = content.find(str(username))
-    pos1 -= 3
+    pos1 = content.find(str(username)) - 3
     pos2 = pos1
-    pos1 = content.rfind('"', 0, pos1 - 3)
-    pos1 += 1
+    pos1 = content.rfind('"', 0, pos1 - 3) + 1
     id = content[pos1:pos2]
     print(id)
     return id
@@ -83,7 +75,7 @@ def t(text, dest):
             if dest == "fr":
                 text = liste[original_pos]
         except:
-            print("There is no translation")
+            print("No translation available")
     return (text)
 
 
@@ -96,15 +88,10 @@ def get_color(guild_id=None):
         file = open("embed_color.json", "r")
         content = file.read()
         file.close
-        pos1 = content.find(str(guild_id))
-        pos1 += len(str(guild_id))
-        pos1 += 3
+        pos1 = content.find(str(guild_id)) + len(str(guild_id)) + 3
         pos2 = pos1
-        i = 0
-        while i == 0:
+        while content[pos2] != '"':
             pos2 += 1
-            if content[pos2] == '"':
-                i = 1
         code = content[pos1:pos2]
         print(code)
         if "random" in code:
@@ -129,15 +116,11 @@ def get_language(guild_id=None):
     file.close
     print(content)
     try:
-        pos1 = content.find(str(guild_id))
-        pos1 += len(str(guild_id))
-        pos1 += 3
+        pos1 = content.find(str(guild_id)) + len(str(guild_id)) + 3
         pos2 = pos1
         i = 0
-        while i == 0:
+        while content[pos2] != '"':
             pos2 += 1
-            if content[pos2] == '"':
-                i = 1
         code = content[pos1:pos2]
         language = code
         print(code)
@@ -1412,3 +1395,4 @@ async def help(ctx, arg=None):
 
 
 bot.run(token)
+
