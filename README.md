@@ -1,2 +1,4 @@
 # Scratch-Bot-V1.4
-Discord scratch bot
+A Discord bot for Scratch-related stuff
+
+Not maintained anymore as it's really old and bad stuff
